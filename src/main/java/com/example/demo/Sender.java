@@ -18,7 +18,7 @@ public class Sender {
         factory.setPassword("guest");
         factory.setPort(5672);
 
-        Connection connection = factory.newConnection();
+       try(Connection connection = factory.newConnection()){
         // System.out.println(connection.hashCode());
 
         // create a new channel
@@ -36,7 +36,7 @@ public class Sender {
         channel.basicPublish("", NAME_QUEUE, null, message.getBytes());
         System.out.println("[x] Sent '" + message + "'");
 
-        // decla
-    }
 
+    }
+    }
 }
